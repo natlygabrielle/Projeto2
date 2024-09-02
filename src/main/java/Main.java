@@ -11,10 +11,17 @@ public class Main {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Pagamento pg = new Pagamento();
-        pg.setValor(500);
+        pg.setValor(750);
         pg.setDate(new Date());
         System.out.println(pg);
         entityManager.persist(pg);
+        entityManager.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        pg.setValor(550);
+
+        entityManager.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        entityManager.remove(pg);
         entityManager.getTransaction().commit();
         entityManagerFactory.close();
         entityManager.close();
